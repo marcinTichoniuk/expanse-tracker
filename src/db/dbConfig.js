@@ -4,7 +4,6 @@ export const connectDB = async () => {
   try {
     const db = await mongoose.connect('mongodb://127.0.0.1:27017/expanse-tracker');
 
-    console.log('MongoDB connected');
     console.log(`Database host: ${db.connection.host}`);
     console.log(`Database name: ${db.connection.name}`);
 
@@ -20,8 +19,6 @@ export const connectDB = async () => {
 const disconnectDB = async () => {
   try {
     await mongoose.disconnect();
-
-    console.log('MongoDB disconnected');
   } catch (error) {
     console.error(`MongoDB disconnection error: ${error.message}`);
   }
@@ -35,3 +32,13 @@ process.on('SIGINT', async () => {
 
 // kill command / Docker stop / Kubernetes
 // process.on('SIGTERM', gracefulShutdown);
+
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose connected to MongoDB');
+});
+mongoose.connection.on('error', (error) => {
+  console.error(`Mongoose connection error: ${error}`);
+});
+mongoose.connection.on('disconnected', () => {
+  console.log('Mongoose disconnected from MongoDB');
+});
