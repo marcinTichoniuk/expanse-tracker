@@ -16,3 +16,22 @@ export const connectDB = async () => {
     process.exit(1);
   }
 };
+
+const disconnectDB = async () => {
+  try {
+    await mongoose.disconnect();
+
+    console.log('MongoDB disconnected');
+  } catch (error) {
+    console.error(`MongoDB disconnection error: ${error.message}`);
+  }
+};
+
+// Ctrl+C
+process.on('SIGINT', async () => {
+  await disconnectDB();
+  process.exit(0);
+});
+
+// kill command / Docker stop / Kubernetes
+// process.on('SIGTERM', gracefulShutdown);
