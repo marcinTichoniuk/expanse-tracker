@@ -1,6 +1,7 @@
 import express, { json } from 'express';
 import { connectDB } from './db/dbConfig.js';
 import { envConfig } from './configs/envConfig.js';
+import router from './routes/index.js';
 
 const app = express();
 const PORT = envConfig.PORT;
@@ -12,6 +13,9 @@ app.use(json());
 app.get('/', (req, res) => {
   return res.status(200).json({ message: 'Hello World!' });
 });
+
+// routes
+app.use('/api/v1', router);
 
 // start server
 const startServer = async () => {
