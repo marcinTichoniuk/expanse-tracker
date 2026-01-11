@@ -1,13 +1,14 @@
 import mongoose from 'mongoose';
+import { envConfig } from '../configs/envConfig.js';
 
 export const connectDB = async () => {
   try {
-    const db = await mongoose.connect('mongodb://127.0.0.1:27017/expanse-tracker');
+    const db = await mongoose.connect(envConfig.DB_URI);
 
     console.log(`Database host: ${db.connection.host}`);
     console.log(`Database name: ${db.connection.name}`);
 
-    if (process.env.NODE_ENV === 'development') {
+    if (envConfig.NODE_ENV === 'development') {
       mongoose.set('debug', true);
     }
   } catch (error) {

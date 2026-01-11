@@ -1,8 +1,9 @@
 import express, { json } from 'express';
 import { connectDB } from './db/dbConfig.js';
+import { envConfig } from './configs/envConfig.js';
 
 const app = express();
-const PORT = 3000;
+const PORT = envConfig.PORT;
 
 // middlewares
 app.use(json());
@@ -27,3 +28,6 @@ const startServer = async () => {
 };
 
 startServer();
+
+// Additional things to check:
+// - add Category model
