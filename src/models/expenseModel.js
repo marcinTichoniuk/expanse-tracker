@@ -12,7 +12,7 @@ const expenseSchema = new Schema(
       type: String,
       enum: {
         values: ['Grocery', 'Car', 'VOD'],
-        message: '{VALUE} is not supported',
+        message: `"{VALUE}" category is not supported`,
       },
       required: true,
     },

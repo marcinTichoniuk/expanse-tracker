@@ -35,3 +35,18 @@ startServer();
 
 // Additional things to check:
 // - add Category model
+
+/*
+Your Phase 1 Checklist (for each project):
+1. Set up Express server - basic server that runs
+2. Connect to MongoDB - using mongoose, connection string in .env
+3. Create mongoose schema/model - define your data structure
+4. Build CRUD routes:
+    POST - create new item
+    GET - fetch all items / single item by ID
+    PUT/PATCH - update item
+    DELETE - delete item
+5. Basic input validation - check required fields, data types (use express-validator or Zod)
+6. Basic error handling - try/catch blocks, send proper status codes (200, 201, 400, 404, 500)
+7. Test with Postman/Thunder Client - make sure all routes work
+*/
