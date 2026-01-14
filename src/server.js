@@ -2,6 +2,7 @@ import express, { json } from 'express';
 import { connectDB } from './db/dbConfig.js';
 import { envConfig } from './configs/envConfig.js';
 import router from './routes/index.js';
+import { notFoundMiddleware } from './middlewares/notFoundMiddleware.js';
 
 const app = express();
 const PORT = envConfig.PORT;
@@ -16,6 +17,8 @@ app.get('/', (req, res) => {
 
 // routes
 app.use('/api/v1', router);
+
+app.use(notFoundMiddleware);
 
 // start server
 const startServer = async () => {
