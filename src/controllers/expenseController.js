@@ -24,6 +24,11 @@ export const getExpense = async (req, res) => {
     return res.status(200).json(expense);
   } catch (error) {
     console.error(error.message);
+
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: 'Invalid id format' });
+    }
+
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
@@ -37,6 +42,11 @@ export const createExpense = async (req, res) => {
     return res.status(201).json(newExpense);
   } catch (error) {
     console.error(error.message);
+
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ message: 'Mongoose Validation Error' });
+    }
+
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
@@ -59,6 +69,15 @@ export const updateExpense = async (req, res) => {
     return res.status(200).json(updatedExpense);
   } catch (error) {
     console.error(error.message);
+
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: 'Invalid id format' });
+    }
+
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ message: 'Mongoose Validation Error' });
+    }
+
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
@@ -76,6 +95,11 @@ export const deleteExpense = async (req, res) => {
     return res.sendStatus(204);
   } catch (error) {
     console.error(error.message);
+
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: 'Invalid id format' });
+    }
+
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 };
