@@ -23,6 +23,7 @@ const expenseSchema = new Schema(
     description: {
       type: String,
       trim: true,
+      maxLength: 200,
     },
   },
   { timestamps: true }
