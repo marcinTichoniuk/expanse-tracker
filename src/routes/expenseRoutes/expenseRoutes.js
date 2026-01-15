@@ -4,6 +4,7 @@ import {
   deleteExpense,
   getAllExpenses,
   getExpense,
+  getTotalSpendings,
   updateExpense,
 } from '../../controllers/expenseController.js';
 import { createExpenseSchema, expenseIdSchema, updateExpenseSchema } from '../../schemas/expenseSchema.js';
@@ -11,6 +12,10 @@ import { inputValidationMiddleware } from '../../middlewares/inputValidationMidd
 
 const router = Router();
 
+// aggregations
+router.get('/total', getTotalSpendings);
+
+// CRUD
 router.get('/', getAllExpenses);
 router.get('/:id', inputValidationMiddleware('params', expenseIdSchema), getExpense);
 router.post('/', inputValidationMiddleware('body', createExpenseSchema), createExpense);

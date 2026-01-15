@@ -1,5 +1,25 @@
 import { Expense } from '../models/expenseModel.js';
 
+export const getTotalSpendings = async (req, res) => {
+  try {
+    const result = await Expense.aggregate([
+      {
+        $group: {
+          _id: null,
+          total: { $sum: '$amount' },
+        },
+      },
+    ]);
+
+    const total = result.length > 0 ? result[0].total : 0;
+
+    return res.status(200).json({ total });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
 export const getAllExpenses = async (req, res) => {
   try {
     const allExpenses = await Expense.find();
